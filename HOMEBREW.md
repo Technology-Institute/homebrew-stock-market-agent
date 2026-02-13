@@ -2,56 +2,72 @@
 
 This guide covers both GitHub and GitLab for hosting your Homebrew tap.
 
-## Option 1: Using GitHub
+## Setup for GitHub (Technology-Institute)
 
-### Creating Your Homebrew Tap
+### Step 1: Create GitHub Personal Access Token
 
-1. **Create a new GitHub repository** for your Homebrew tap:
-   ```bash
-   # The repository MUST be named: homebrew-tap
-   # GitHub URL will be: https://github.com/bjoern/homebrew-tap
-   ```
+1. Go to https://github.com/settings/tokens/new
+2. Give it a descriptive name like "GoReleaser - Stock Market Agent"
+3. Set expiration (or select "No expiration" if you prefer)
+4. Select the following scopes:
+   - ✅ `repo` (Full control of private repositories)
+   - ✅ `write:packages` (Upload packages to GitHub Package Registry)
+5. Click "Generate token"
+6. **Copy the token immediately** (you won't be able to see it again!)
 
-2. **Set up the tap repository** (do this once):
-   ```bash
-   # Clone your tap repository
-   git clone https://github.com/bjoern/homebrew-tap.git
-   cd homebrew-tap
-   mkdir -p Formula
-   # Create initial commit
-   git add .
-   git commit -m "Initial commit"
-   git push origin main
-   ```
+### Step 2: Set the Token as Environment Variable
 
-3. **Configure GoReleaser** with GitHub token:
-   ```bash
-   # Create a GitHub Personal Access Token at:
-   # https://github.com/settings/tokens/new
-   # Scopes needed: repo, write:packages
-   
-   export GITHUB_TOKEN="your_github_token_here"
-   ```
+```bash
+export GITHUB_TOKEN="ghp_your_token_here"
+```
 
-4. **Edit `goreleaser.yaml`** and uncomment the GitHub brews section
+To make it permanent, add to your `~/.bashrc` or `~/.zshrc`:
+```bash
+echo 'export GITHUB_TOKEN="ghp_your_token_here"' >> ~/.bashrc
+source ~/.bashrc
+```
 
-5. **Create a release in your go-agent repository**:
-   ```bash
-   cd /path/to/go-agent
-   
-   # Tag your release
-   git tag -a v1.0.0 -m "First release"
-   git push origin v1.0.0
-   
-   # Run GoReleaser
-   goreleaser release --clean
-   ```
+### Step 3: Initialize the Homebrew Tap Repository
 
-6. **Users can now install via Homebrew**:
-   ```bash
-   brew tap bjoern/tap
-   brew install stock-market-agent
-   ```
+The tap repository is already created at:
+https://github.com/Technology-Institute/homebrew-stock-market-agent
+
+Initialize it with a Formula directory:
+```bash
+git clone https://github.com/Technology-Institute/homebrew-stock-market-agent.git
+cd homebrew-stock-market-agent
+mkdir -p Formula
+echo "# Homebrew Tap for Stock Market Agent" > README.md
+git add .
+git commit -m "Initialize tap repository"
+git push origin main
+```
+
+### Step 4: Create a Release
+
+```bash
+cd /path/to/stock-market-agent
+
+# Make sure you're on the right remote
+git remote add github https://github.com/Technology-Institute/stock-market-agent.git
+
+# Push your code
+git push github main
+
+# Create and push a tag
+git tag -a v1.0.0 -m "First release"
+git push github v1.0.0
+
+# Run GoReleaser (this will automatically update the homebrew tap)
+goreleaser release --clean
+```
+
+### Step 5: Users Can Install
+
+```bash
+brew tap Technology-Institute/stock-market-agent
+brew install stock-market-agent
+```
 
 ## Using GitLab (Your Configuration)
 
