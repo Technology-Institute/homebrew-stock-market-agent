@@ -5,13 +5,13 @@
 class StockMarketAgent < Formula
   desc "AI-powered stock market update agent for Telegram"
   homepage "https://github.com/Technology-Institute/homebrew-stock-market-agent"
-  version "1.0.1"
+  version "1.0.2"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/Technology-Institute/homebrew-stock-market-agent/releases/download/v1.0.1/homebrew-stock-market-agent_1.0.1_darwin_amd64.tar.gz"
-      sha256 "d1c0393fe1af5c13bd59804f3fc97db29c3731c83105bd963ef2a94b7d460b68"
+      url "https://github.com/Technology-Institute/homebrew-stock-market-agent/releases/download/v1.0.2/homebrew-stock-market-agent_1.0.2_darwin_amd64.tar.gz"
+      sha256 "80ad0050e6e2dba3d47616f7e4b43bdae56475511b64df1fb71a412154bd79aa"
 
       def install
         bin.install "stock-market-agent"
@@ -21,8 +21,8 @@ class StockMarketAgent < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/Technology-Institute/homebrew-stock-market-agent/releases/download/v1.0.1/homebrew-stock-market-agent_1.0.1_darwin_arm64.tar.gz"
-      sha256 "346cc9a377aefdaf8eb3adc98444e4709787aba9ddcc4ef0def0bb9dabbb6e43"
+      url "https://github.com/Technology-Institute/homebrew-stock-market-agent/releases/download/v1.0.2/homebrew-stock-market-agent_1.0.2_darwin_arm64.tar.gz"
+      sha256 "ffb7e170be8fcbd10a7dc5bba4817cd360d7e7d94a0af9c8b91537ab9f5c821b"
 
       def install
         bin.install "stock-market-agent"
@@ -35,8 +35,8 @@ class StockMarketAgent < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/Technology-Institute/homebrew-stock-market-agent/releases/download/v1.0.1/homebrew-stock-market-agent_1.0.1_linux_amd64.tar.gz"
-      sha256 "e84c22e63325a547efe1f7b78e903685f5c2f7cad2b086272e0c4093464155aa"
+      url "https://github.com/Technology-Institute/homebrew-stock-market-agent/releases/download/v1.0.2/homebrew-stock-market-agent_1.0.2_linux_amd64.tar.gz"
+      sha256 "d138fc222407769183f2db7b66632a062aa01d31af05ec81fb1f36e026c4b9bd"
       def install
         bin.install "stock-market-agent"
         (etc/"stock-market-agent").install "config.yaml"
@@ -45,8 +45,8 @@ class StockMarketAgent < Formula
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/Technology-Institute/homebrew-stock-market-agent/releases/download/v1.0.1/homebrew-stock-market-agent_1.0.1_linux_arm64.tar.gz"
-      sha256 "38becfacdf92fae49dec39381a21da2ad2672b3d782ae1ec6b9617ef315fe82b"
+      url "https://github.com/Technology-Institute/homebrew-stock-market-agent/releases/download/v1.0.2/homebrew-stock-market-agent_1.0.2_linux_arm64.tar.gz"
+      sha256 "07fbaba433d2bb8c5bdcb79634a2cd11bb367dd3f9e4e7896ca76a02d2aa5a2f"
       def install
         bin.install "stock-market-agent"
         (etc/"stock-market-agent").install "config.yaml"
@@ -54,6 +54,28 @@ class StockMarketAgent < Formula
         (etc/"stock-market-agent").install "setup-cron.sh"
       end
     end
+  end
+
+  def caveats
+    <<~EOS
+      Configuration files installed to:
+        #{etc}/stock-market-agent/
+
+      To set up your API keys:
+        1. Copy the sample env file:
+           cp #{etc}/stock-market-agent/.sample-env ~/.stock-market-agent.env
+
+        2. Edit ~/.stock-market-agent.env and add your API keys:
+           - ANTHROPIC_API_KEY
+           - TELEGRAM_BOT_TOKEN
+           - TELEGRAM_CHAT_ID
+           - ALPHAVANTAGE_API_KEY (optional)
+
+        3. Copy config to your home directory (optional):
+           cp #{etc}/stock-market-agent/config.yaml ~/.stock-market-agent.yaml
+
+      Run 'stock-market-agent --help' for more information.
+    EOS
   end
 
   test do
