@@ -7,3 +7,6 @@ TELEGRAM_CHAT_ID=your_telegram_chat_id_here
 
 # Alpha Vantage Stock Market Data API
 ALPHAVANTAGE_API_KEY=your_alphavantage_api_key_here
+
+# GitHub Personal Access Token (for releases/deployment only)
+GITHUB_TOKEN=your_github_token_here
