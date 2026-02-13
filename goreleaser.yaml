@@ -51,19 +51,45 @@ changelog:
       - Merge pull request
       - Merge branch
 
-brews:
-  - name: stock-market-agent
-    repository:
-      owner: bjoern
-      name: homebrew-tap
-    folder: Formula
-    homepage: https://github.com/bjoern/go-agent
-    description: AI-powered stock market update agent for Telegram
-    license: MIT
-    install: |
-      bin.install "stock-market-agent"
-      etc.install "config.yaml" => "stock-market-agent/config.yaml"
-      etc.install ".sample-env" => "stock-market-agent/.sample-env"
-      etc.install "setup-cron.sh" => "stock-market-agent/setup-cron.sh"
-    test: |
-      system "#{bin}/stock-market-agent", "--version"
+# For GitHub
+# Uncomment this section if using GitHub
+# brews:
+#   - name: stock-market-agent
+#     repository:
+#       owner: bjoern
+#       name: homebrew-tap
+#     folder: Formula
+#     homepage: https://github.com/bjoern/go-agent
+#     description: AI-powered stock market update agent for Telegram
+#     license: MIT
+#     install: |
+#       bin.install "stock-market-agent"
+#       etc.install "config.yaml" => "stock-market-agent/config.yaml"
+#       etc.install ".sample-env" => "stock-market-agent/.sample-env"
+#       etc.install "setup-cron.sh" => "stock-market-agent/setup-cron.sh"
+#     test: |
+#       system "#{bin}/stock-market-agent", "--version"
+
+# For GitLab
+# Uncomment this section if using GitLab
+gitlab_urls:
+  api: https://gitlab.com/api/v4/
+  download: https://gitlab.com
+  
+# brews:
+#   - name: stock-market-agent
+#     repository:
+#       owner: bjoern
+#       name: homebrew-tap
+#       token: "{{ .Env.GITLAB_TOKEN }}"
+#     folder: Formula
+#     homepage: https://gitlab.com/bjoern/go-agent
+#     description: AI-powered stock market update agent for Telegram
+#     license: MIT
+#     install: |
+#       bin.install "stock-market-agent"
+#       etc.install "config.yaml" => "stock-market-agent/config.yaml"
+#       etc.install ".sample-env" => "stock-market-agent/.sample-env"
+#       etc.install "setup-cron.sh" => "stock-market-agent/setup-cron.sh"
+#     test: |
+#       system "#{bin}/stock-market-agent", "--version"
