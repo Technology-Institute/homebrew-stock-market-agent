@@ -76,20 +76,20 @@ gitlab_urls:
   api: https://gitlab.com/api/v4/
   download: https://gitlab.com
   
-# brews:
-#   - name: stock-market-agent
-#     repository:
-#       owner: bjoern
-#       name: homebrew-tap
-#       token: "{{ .Env.GITLAB_TOKEN }}"
-#     folder: Formula
-#     homepage: https://gitlab.com/bjoern/go-agent
-#     description: AI-powered stock market update agent for Telegram
-#     license: MIT
-#     install: |
-#       bin.install "stock-market-agent"
-#       etc.install "config.yaml" => "stock-market-agent/config.yaml"
-#       etc.install ".sample-env" => "stock-market-agent/.sample-env"
-#       etc.install "setup-cron.sh" => "stock-market-agent/setup-cron.sh"
-#     test: |
-#       system "#{bin}/stock-market-agent", "--version"
+brews:
+  - name: stock-market-agent
+    repository:
+      owner: technology_institute
+      name: homebrew-stock-market-agent
+      token: "{{ .Env.GITLAB_TOKEN }}"
+    folder: Formula
+    homepage: https://gitlab.com/technology_institute/stock-market-agent
+    description: AI-powered stock market update agent for Telegram
+    license: MIT
+    install: |
+      bin.install "stock-market-agent"
+      etc.install "config.yaml" => "stock-market-agent/config.yaml"
+      etc.install ".sample-env" => "stock-market-agent/.sample-env"
+      etc.install "setup-cron.sh" => "stock-market-agent/setup-cron.sh"
+    test: |
+      system "#{bin}/stock-market-agent", "--version"

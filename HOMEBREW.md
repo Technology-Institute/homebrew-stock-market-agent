@@ -53,23 +53,23 @@ This guide covers both GitHub and GitLab for hosting your Homebrew tap.
    brew install stock-market-agent
    ```
 
-## Option 2: Using GitLab
+## Using GitLab (Your Configuration)
 
 ### Creating Your Homebrew Tap on GitLab
 
 1. **Create a new GitLab repository** for your Homebrew tap:
    ```bash
-   # The repository MUST be named: homebrew-tap
-   # GitLab URL will be: https://gitlab.com/bjoern/homebrew-tap
+   # Create at: https://gitlab.com/technology_institute/homebrew-stock-market-agent
+   # Note: The name must start with "homebrew-" for Homebrew to recognize it
    ```
 
 2. **Set up the tap repository** (do this once):
    ```bash
    # Clone your tap repository
-   git clone https://gitlab.com/bjoern/homebrew-tap.git
-   cd homebrew-tap
+   git clone https://gitlab.com/technology_institute/homebrew-stock-market-agent.git
+   cd homebrew-stock-market-agent
    mkdir -p Formula
-   # Create initial commit
+   echo "# Homebrew Tap for Stock Market Agent" > README.md
    git add .
    git commit -m "Initial commit"
    git push origin main
@@ -84,30 +84,28 @@ This guide covers both GitHub and GitLab for hosting your Homebrew tap.
    export GITLAB_TOKEN="your_gitlab_token_here"
    ```
 
-4. **Edit `goreleaser.yaml`**:
-   - Uncomment the `gitlab_urls` section
-   - Uncomment the GitLab brews section
-   - Comment out or remove the GitHub brews section
-
-5. **Create a release in your go-agent repository**:
+4. **Create a release in your stock-market-agent repository**:
    ```bash
-   cd /path/to/go-agent
-   
-   # Add GitLab as remote if needed
-   git remote add gitlab https://gitlab.com/bjoern/go-agent.git
+   cd /path/to/stock-market-agent
    
    # Tag your release
    git tag -a v1.0.0 -m "First release"
-   git push gitlab v1.0.0
+   git push origin v1.0.0
    
-   # Run GoReleaser
+   # Run GoReleaser (this will create the Homebrew formula and push it to your tap repo)
    goreleaser release --clean
    ```
 
-6. **Users can now install via Homebrew**:
+5. **Users can now install via Homebrew**:
    ```bash
-   brew tap bjoern/tap https://gitlab.com/bjoern/homebrew-tap.git
+   brew tap technology_institute/stock-market-agent https://gitlab.com/technology_institute/homebrew-stock-market-agent.git
    brew install stock-market-agent
+   ```
+
+   Or the shorter form after tapping:
+   ```bash
+   brew tap technology_institute/stock-market-agent https://gitlab.com/technology_institute/homebrew-stock-market-agent.git
+   brew install technology_institute/stock-market-agent/stock-market-agent
    ```
 
 ## Testing Locally Before Release
