@@ -57,7 +57,7 @@ brews:
     repository:
       owner: Technology-Institute
       name: homebrew-stock-market-agent
-    folder: Formula
+    directory: Formula
     homepage: https://github.com/Technology-Institute/stock-market-agent
     description: AI-powered stock market update agent for Telegram
     license: MIT
