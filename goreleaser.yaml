@@ -39,7 +39,7 @@ checksum:
   name_template: 'checksums.txt'
 
 snapshot:
-  name_template: "{{ incpatch .Version }}-next"
+  version_template: "{{ incpatch .Version }}-next"
 
 changelog:
   sort: asc
@@ -51,14 +51,19 @@ changelog:
       - Merge pull request
       - Merge branch
 
-# For GitHub
+release:
+  github:
+    owner: Technology-Institute
+    name: homebrew-stock-market-agent
+
+# For Homebrew
 brews:
   - name: stock-market-agent
     repository:
       owner: Technology-Institute
       name: homebrew-stock-market-agent
     directory: Formula
-    homepage: https://github.com/Technology-Institute/stock-market-agent
+    homepage: https://github.com/Technology-Institute/homebrew-stock-market-agent
     description: AI-powered stock market update agent for Telegram
     license: MIT
     install: |
