@@ -73,10 +73,3 @@ brews:
       (etc/"stock-market-agent").install "setup-cron.sh"
     test: |
       system "#{bin}/stock-market-agent", "--version"
-    install: |
-      bin.install "stock-market-agent"
-      etc.install "config.yaml" => "stock-market-agent/config.yaml"
-      etc.install ".sample-env" => "stock-market-agent/.sample-env"
-      etc.install "setup-cron.sh" => "stock-market-agent/setup-cron.sh"
-    test: |
-      system "#{bin}/stock-market-agent", "--version"
