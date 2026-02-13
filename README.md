@@ -15,8 +15,8 @@ A Go-based AI agent that sends stock market updates to a Telegram channel using 
 ### Using Homebrew (Linux/macOS)
 
 ```bash
-# Add the tap (once you've published it)
-brew tap bjoern/tap
+# Add the tap
+brew tap Technology-Institute/homebrew-stock-market-agent
 
 # Install the agent
 brew install stock-market-agent
@@ -25,14 +25,14 @@ brew install stock-market-agent
 ### From Source
 
 ```bash
-git clone https://github.com/bjoern/go-agent.git
-cd go-agent
+git clone https://github.com/Technology-Institute/homebrew-stock-market-agent.git
+cd homebrew-stock-market-agent
 make build
 ```
 
 ### Using Pre-built Binaries
 
-Download the latest release from the [releases page](https://github.com/bjoern/go-agent/releases).
+Download the latest release from the [releases page](https://github.com/Technology-Institute/homebrew-stock-market-agent/releases).
 
 ## Setup
 
