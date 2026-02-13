@@ -71,5 +71,23 @@ brews:
       (etc/"stock-market-agent").install "config.yaml"
       (etc/"stock-market-agent").install ".sample-env"
       (etc/"stock-market-agent").install "setup-cron.sh"
+    caveats: |
+      Configuration files installed to:
+        #{etc}/stock-market-agent/
+
+      To set up your API keys:
+        1. Copy the sample env file:
+           cp #{etc}/stock-market-agent/.sample-env ~/.stock-market-agent.env
+        
+        2. Edit ~/.stock-market-agent.env and add your API keys:
+           - ANTHROPIC_API_KEY
+           - TELEGRAM_BOT_TOKEN
+           - TELEGRAM_CHAT_ID
+           - ALPHAVANTAGE_API_KEY (optional)
+
+        3. Copy config to your home directory (optional):
+           cp #{etc}/stock-market-agent/config.yaml ~/.stock-market-agent.yaml
+
+      Run 'stock-market-agent --help' for more information.
     test: |
       system "#{bin}/stock-market-agent", "--version"

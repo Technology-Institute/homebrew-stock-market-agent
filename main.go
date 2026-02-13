@@ -17,6 +17,8 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+var version = "dev"
+
 type Config struct {
 	Agent struct {
 		SystemPrompt string `yaml:"system_prompt"`
@@ -41,13 +43,100 @@ type StockQuote struct {
 
 type StockToolInput struct {}
 
+func printHelp() {
+	fmt.Println("Stock Market Telegram Agent")
+	fmt.Println()
+	fmt.Println("Usage: stock-market-agent [options]")
+	fmt.Println()
+	fmt.Println("Options:")
+	fmt.Println("  --help     Show this help message")
+	fmt.Println("  --version  Show version information")
+	fmt.Println()
+	fmt.Println("Configuration:")
+	fmt.Println("  The agent looks for config files in:")
+	fmt.Println("  1. Current directory (./config.yaml, ./.env)")
+	fmt.Println("  2. Homebrew install location (/opt/homebrew/etc/stock-market-agent/ or /usr/local/etc/stock-market-agent/)")
+	fmt.Println()
+	fmt.Println("  Copy the sample env file and add your API keys:")
+	fmt.Println("    cp .sample-env .env")
+	fmt.Println()
+	fmt.Println("  Required environment variables:")
+	fmt.Println("    ANTHROPIC_API_KEY      - Your Anthropic API key")
+	fmt.Println("    TELEGRAM_BOT_TOKEN     - Your Telegram bot token")
+	fmt.Println("    TELEGRAM_CHAT_ID       - Your Telegram chat/channel ID")
+	fmt.Println("    ALPHAVANTAGE_API_KEY   - Alpha Vantage API key (optional)")
+	fmt.Println()
+	fmt.Println("Documentation: https://github.com/Technology-Institute/homebrew-stock-market-agent")
+}
+
+func findConfigFile() string {
+	// Try current directory first
+	if _, err := os.Stat("config.yaml"); err == nil {
+		return "config.yaml"
+	}
+	
+	// Try Homebrew locations
+	brewPaths := []string{
+		"/opt/homebrew/etc/stock-market-agent/config.yaml",
+		"/usr/local/etc/stock-market-agent/config.yaml",
+	}
+	
+	for _, path := range brewPaths {
+		if _, err := os.Stat(path); err == nil {
+			return path
+		}
+	}
+	
+	return "config.yaml"
+}
+
+func findEnvFile() string {
+	// Try current directory first
+	if _, err := os.Stat(".env"); err == nil {
+		return ".env"
+	}
+	
+	// Try Homebrew locations
+	brewPaths := []string{
+		"/opt/homebrew/etc/stock-market-agent/.env",
+		"/usr/local/etc/stock-market-agent/.env",
+	}
+	
+	for _, path := range brewPaths {
+		if _, err := os.Stat(path); err == nil {
+			return path
+		}
+	}
+	
+	return ".env"
+}
+
 func main() {
-	if err := godotenv.Load(); err != nil {
-		log.Println("No .env file found, using environment variables")
+	// Handle flags
+	if len(os.Args) > 1 {
+		switch os.Args[1] {
+		case "--help", "-h":
+			printHelp()
+			os.Exit(0)
+		case "--version", "-v":
+			fmt.Printf("stock-market-agent version %s\n", version)
+			os.Exit(0)
+		}
 	}
 
-	configData, err := os.ReadFile("config.yaml")
+	// Load environment variables
+	envFile := findEnvFile()
+	if err := godotenv.Load(envFile); err != nil {
+		log.Printf("No .env file found at %s, using environment variables\n", envFile)
+	}
+
+	// Load config
+	configFile := findConfigFile()
+	configData, err := os.ReadFile(configFile)
 	if err != nil {
+		log.Printf("Error reading config file %s: %v\n", configFile, err)
+		log.Println("Run 'stock-market-agent --help' for setup instructions")
+		os.Exit(1)
 		log.Fatalf("Failed to read config.yaml: %v", err)
 	}
 
