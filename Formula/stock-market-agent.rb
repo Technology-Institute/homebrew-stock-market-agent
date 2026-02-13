@@ -5,53 +5,53 @@
 class StockMarketAgent < Formula
   desc "AI-powered stock market update agent for Telegram"
   homepage "https://github.com/Technology-Institute/homebrew-stock-market-agent"
-  version "1.0.0"
+  version "1.0.1"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/Technology-Institute/homebrew-stock-market-agent/releases/download/v1.0.0/homebrew-stock-market-agent_1.0.0_darwin_amd64.tar.gz"
-      sha256 "f8e551bfa9a0c30382e8a14944324f447443a946717326930704c4c929a7948f"
+      url "https://github.com/Technology-Institute/homebrew-stock-market-agent/releases/download/v1.0.1/homebrew-stock-market-agent_1.0.1_darwin_amd64.tar.gz"
+      sha256 "d1c0393fe1af5c13bd59804f3fc97db29c3731c83105bd963ef2a94b7d460b68"
 
       def install
         bin.install "stock-market-agent"
-        etc.install "config.yaml" => "stock-market-agent/config.yaml"
-        etc.install ".sample-env" => "stock-market-agent/.sample-env"
-        etc.install "setup-cron.sh" => "stock-market-agent/setup-cron.sh"
+        (etc/"stock-market-agent").install "config.yaml"
+        (etc/"stock-market-agent").install ".sample-env"
+        (etc/"stock-market-agent").install "setup-cron.sh"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/Technology-Institute/homebrew-stock-market-agent/releases/download/v1.0.0/homebrew-stock-market-agent_1.0.0_darwin_arm64.tar.gz"
-      sha256 "9f84352a4462d75cb7af0d9f897f4ba180586c0cb422b2ee62538f2d9cd1db19"
+      url "https://github.com/Technology-Institute/homebrew-stock-market-agent/releases/download/v1.0.1/homebrew-stock-market-agent_1.0.1_darwin_arm64.tar.gz"
+      sha256 "346cc9a377aefdaf8eb3adc98444e4709787aba9ddcc4ef0def0bb9dabbb6e43"
 
       def install
         bin.install "stock-market-agent"
-        etc.install "config.yaml" => "stock-market-agent/config.yaml"
-        etc.install ".sample-env" => "stock-market-agent/.sample-env"
-        etc.install "setup-cron.sh" => "stock-market-agent/setup-cron.sh"
+        (etc/"stock-market-agent").install "config.yaml"
+        (etc/"stock-market-agent").install ".sample-env"
+        (etc/"stock-market-agent").install "setup-cron.sh"
       end
     end
   end
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/Technology-Institute/homebrew-stock-market-agent/releases/download/v1.0.0/homebrew-stock-market-agent_1.0.0_linux_amd64.tar.gz"
-      sha256 "7151beef8072d5359da43af5822bdbe8e29ff84162cd19bb5fe9e13dd0bf2dd8"
+      url "https://github.com/Technology-Institute/homebrew-stock-market-agent/releases/download/v1.0.1/homebrew-stock-market-agent_1.0.1_linux_amd64.tar.gz"
+      sha256 "e84c22e63325a547efe1f7b78e903685f5c2f7cad2b086272e0c4093464155aa"
       def install
         bin.install "stock-market-agent"
-        etc.install "config.yaml" => "stock-market-agent/config.yaml"
-        etc.install ".sample-env" => "stock-market-agent/.sample-env"
-        etc.install "setup-cron.sh" => "stock-market-agent/setup-cron.sh"
+        (etc/"stock-market-agent").install "config.yaml"
+        (etc/"stock-market-agent").install ".sample-env"
+        (etc/"stock-market-agent").install "setup-cron.sh"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/Technology-Institute/homebrew-stock-market-agent/releases/download/v1.0.0/homebrew-stock-market-agent_1.0.0_linux_arm64.tar.gz"
-      sha256 "8e5c1a71753ad8cf396b710d32daef8bab99c1333c10b90929a16a504c8e50c7"
+      url "https://github.com/Technology-Institute/homebrew-stock-market-agent/releases/download/v1.0.1/homebrew-stock-market-agent_1.0.1_linux_arm64.tar.gz"
+      sha256 "38becfacdf92fae49dec39381a21da2ad2672b3d782ae1ec6b9617ef315fe82b"
       def install
         bin.install "stock-market-agent"
-        etc.install "config.yaml" => "stock-market-agent/config.yaml"
-        etc.install ".sample-env" => "stock-market-agent/.sample-env"
-        etc.install "setup-cron.sh" => "stock-market-agent/setup-cron.sh"
+        (etc/"stock-market-agent").install "config.yaml"
+        (etc/"stock-market-agent").install ".sample-env"
+        (etc/"stock-market-agent").install "setup-cron.sh"
       end
     end
   end
