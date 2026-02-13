@@ -10,6 +10,30 @@ A Go-based AI agent that sends stock market updates to a Telegram channel using 
 - Configurable via YAML config file
 - Designed to run as a cron job
 
+## Installation
+
+### Using Homebrew (Linux/macOS)
+
+```bash
+# Add the tap (once you've published it)
+brew tap bjoern/tap
+
+# Install the agent
+brew install stock-market-agent
+```
+
+### From Source
+
+```bash
+git clone https://github.com/bjoern/go-agent.git
+cd go-agent
+make build
+```
+
+### Using Pre-built Binaries
+
+Download the latest release from the [releases page](https://github.com/bjoern/go-agent/releases).
+
 ## Setup
 
 1. Copy the sample environment file:

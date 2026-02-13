@@ -1,0 +1,69 @@
+# GoReleaser configuration for stock-market-agent
+version: 2
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: stock-market-agent
+    binary: stock-market-agent
+    main: .
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w -X main.version={{.Version}}
+
+archives:
+  - id: stock-market-agent
+    format: tar.gz
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- .Version }}_
+      {{- .Os }}_
+      {{- .Arch }}
+    files:
+      - LICENSE*
+      - README.md
+      - config.yaml
+      - .sample-env
+      - setup-cron.sh
+
+checksum:
+  name_template: 'checksums.txt'
+
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^chore:'
+      - Merge pull request
+      - Merge branch
+
+brews:
+  - name: stock-market-agent
+    repository:
+      owner: bjoern
+      name: homebrew-tap
+    folder: Formula
+    homepage: https://github.com/bjoern/go-agent
+    description: AI-powered stock market update agent for Telegram
+    license: MIT
+    install: |
+      bin.install "stock-market-agent"
+      etc.install "config.yaml" => "stock-market-agent/config.yaml"
+      etc.install ".sample-env" => "stock-market-agent/.sample-env"
+      etc.install "setup-cron.sh" => "stock-market-agent/setup-cron.sh"
+    test: |
+      system "#{bin}/stock-market-agent", "--version"

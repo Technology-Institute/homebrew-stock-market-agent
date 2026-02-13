@@ -1,3 +1,21 @@
+# Binaries
 stock-market-agent
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Environment files
 .env
+
+# Logs
 *.log
+
+# Go build artifacts
+dist/
+*.test
+*.out
+
+# Dependency directories
+vendor/
